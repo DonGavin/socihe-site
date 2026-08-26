@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership | The Society of Cannabis in Higher Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:   #1a4a2e;
+    --hunter:   #0e3020;
+    --sage:     #3a6b4a;
+    --sage-lt:  #5a8a68;
+    --gold:     #b8982a;
+    --gold-lt:  #d4b84a;
+    --gold-pale:#f5edcf;
+    --crimson:  #7a1e2e;
+    --cream:    #f7f4ef;
+    --parchment:#ede8df;
+    --charcoal: #2a2a2a;
+    --mid:      #555;
+    --light:    #888;
+    --border:   rgba(0,0,0,0.09);
+    --white:    #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.7; overflow-x: hidden; }
+
+  /* UTILITY BAR */
+  .utility-bar { background: var(--hunter); color: rgba(255,255,255,.65); font-size: .78rem; letter-spacing: .04em; padding: 6px 0; }
+  .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: center; text-align: center; }
+  .utility-bar a { color: rgba(255,255,255,.65); text-decoration: none; margin-left: 16px; transition: color .2s; }
+  .utility-bar a:hover { color: var(--gold-lt); }
+  .util-join { background: var(--gold); color: var(--white) !important; padding: 3px 12px; border-radius: 2px; font-weight: 700; }
+  .util-join:hover { background: var(--gold-lt) !important; color: var(--hunter) !important; }
+
+  /* HEADER */
+  header { background: var(--white); border-bottom: 3px solid var(--forest); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 32px; height: 72px; }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+  .logo-shield { width: 62px; height: auto; display: block; flex-shrink: 0; }
+  .org-top { font-family: 'Cinzel', serif; font-size: .62rem; font-weight: 500; color: var(--crimson); letter-spacing: .12em; text-transform: uppercase; }
+  .org-main { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--forest); letter-spacing: .04em; line-height: 1.15; }
+  nav { flex: 1; }
+  nav ul { list-style: none; display: flex; gap: 2px; }
+  nav ul li a { display: block; font-size: .85rem; font-weight: 600; color: var(--charcoal); text-decoration: none; padding: 8px 14px; border-radius: 2px; letter-spacing: .02em; transition: background .2s, color .2s; }
+  nav ul li a:hover { background: var(--parchment); color: var(--forest); }
+  nav ul li a.active { color: var(--forest); border-bottom: 2px solid var(--gold); }
+  .nav-cta { background: var(--forest); color: var(--white) !important; padding: 8px 18px !important; border-radius: 2px; }
+  .nav-cta:hover { background: var(--sage) !important; }
+
+  /* HERO */
+  .page-hero { background: linear-gradient(135deg, var(--hunter) 0%, var(--forest) 60%, var(--sage) 100%); padding: 72px 24px 60px; position: relative; overflow: hidden; color: var(--white); }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 25%, rgba(184,152,42,.14) 0%, transparent 50%), radial-gradient(ellipse at 10% 80%, rgba(122,30,46,.10) 0%, transparent 45%); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .breadcrumb { font-size: .78rem; color: rgba(255,255,255,.55); margin-bottom: 14px; letter-spacing: .05em; }
+  .breadcrumb a { color: var(--gold-lt); text-decoration: none; }
+  .hero-divider { width: 56px; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); margin: 18px 0; }
+  .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+  .hero-p { font-size: 1.05rem; color: rgba(255,255,255,.82); font-weight: 300; line-height: 1.75; max-width: 580px; }
+  .hero-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+  .hero-pill { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.85); font-size: .8rem; font-weight: 600; letter-spacing: .04em; padding: 7px 16px; border-radius: 20px; text-decoration: none; transition: all .2s; }
+  .hero-pill:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+  .hero-strip { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+  .hs-card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; backdrop-filter: blur(10px); padding: 18px 24px; text-align: center; min-width: 160px; }
+  .hs-num { font-family: 'EB Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold-lt); line-height: 1; }
+  .hs-label { font-size: .75rem; color: rgba(255,255,255,.6); margin-top: 4px; letter-spacing: .04em; }
+
+  /* SHARED */
+  section { padding: 72px 24px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .22em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+  .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem,2.8vw,2rem); font-weight: 700; color: var(--forest); line-height: 1.25; }
+  .title-rule { width: 56px; height: 3px; background: var(--gold); margin: 14px 0 36px; }
+  .section-intro { font-size: 1rem; color: var(--mid); max-width: 680px; font-weight: 300; line-height: 1.75; margin-bottom: 48px; }
+
+  /* TIER TOGGLE */
+  .tier-section { background: var(--white); }
+  .tier-toggle { display: flex; gap: 0; margin-bottom: 40px; background: var(--parchment); border-radius: 4px; padding: 4px; width: fit-content; }
+  .tt-btn { font-family: 'Cinzel', serif; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 10px 22px; border-radius: 3px; cursor: pointer; border: none; background: transparent; color: var(--mid); transition: all .2s; }
+  .tt-btn.active { background: var(--forest); color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+  .tt-btn:hover:not(.active) { color: var(--forest); }
+  .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .tier-view { display: none; }
+  .tier-view.active { display: block; }
+
+  /* TIER CARDS */
+  .tier-card { background: var(--white); border: 2px solid var(--border); border-radius: 6px; overflow: hidden; transition: box-shadow .25s, border-color .25s, transform .25s; position: relative; display: flex; flex-direction: column; }
+  .tier-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1); transform: translateY(-4px); }
+  .tier-card.recommended { border-color: var(--gold); }
+  .tier-card.popular { border-color: var(--forest); }
+  .tier-badge { position: absolute; top: 0; right: 0; font-family: 'Cinzel', serif; font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 6px 14px; border-radius: 0 0 0 6px; }
+  .tier-badge.gold-badge { background: var(--gold); color: var(--white); }
+  .tier-badge.forest-badge { background: var(--forest); color: var(--white); }
+  .tier-header { padding: 28px 26px 20px; border-bottom: 1px solid var(--border); }
+  .tier-header.dark { background: var(--forest); }
+  .tier-header.dark .tier-name { color: var(--white); }
+  .tier-header.dark .tier-desc { color: rgba(255,255,255,.7); }
+  .tier-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+  .tier-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--forest); margin-bottom: 4px; }
+  .tier-desc { font-size: .84rem; color: var(--mid); }
+  .tier-price-block { padding: 20px 26px; border-bottom: 1px solid var(--border); }
+  .tier-prices { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; }
+  .price-option { text-align: center; }
+  .price-duration { font-family: 'Cinzel', serif; font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--light); display: block; margin-bottom: 4px; }
+  .price-amount { font-family: 'EB Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--charcoal); line-height: 1; }
+  .price-amount sup { font-size: 1rem; vertical-align: super; }
+  .price-divider { font-size: 1.2rem; color: var(--border); margin-bottom: 6px; }
+  .price-save { font-size: .72rem; background: rgba(26,74,46,.1); color: var(--forest); font-weight: 700; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-top: 4px; }
+  .tier-features { padding: 20px 26px; flex: 1; }
+  .tier-features ul { list-style: none; }
+  .tier-features ul li { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--mid); padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,.05); }
+  .tier-features ul li:last-child { border-bottom: none; }
+  .tf-check { color: var(--forest); font-weight: 700; flex-shrink: 0; }
+  .tier-cta-wrap { padding: 20px 26px; }
+  .tier-cta { display: block; text-align: center; width: 100%; font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 13px; border-radius: 3px; text-decoration: none; transition: all .2s; }
+  .tier-cta.forest { background: var(--forest); color: var(--white); }
+  .tier-cta.forest:hover { background: var(--sage); }
+  .tier-cta.gold { background: var(--gold); color: var(--hunter); }
+  .tier-cta.gold:hover { background: var(--gold-lt); }
+  .tier-cta.outline { background: transparent; color: var(--forest); border: 2px solid var(--forest); }
+  .tier-cta.outline:hover { background: var(--forest); color: var(--white); }
+
+  /* INSTITUTIONAL */
+  .inst-section { background: var(--parchment); }
+  .inst-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .inst-content h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 16px; }
+  .inst-content p { font-size: .96rem; color: var(--mid); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+  .inst-blurb { background: var(--forest); color: var(--white); border-radius: 4px; padding: 20px 24px; margin-bottom: 24px; font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.1rem; line-height: 1.6; }
+  .inst-blurb strong { color: var(--gold-lt); font-style: normal; }
+  .inst-cards { display: flex; flex-direction: column; gap: 14px; }
+  .inst-card { background: var(--white); border-radius: 5px; border: 1px solid var(--border); padding: 22px; display: flex; gap: 18px; align-items: flex-start; transition: box-shadow .2s; }
+  .inst-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+  .inst-icon { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .inst-icon.grad { background: linear-gradient(135deg, var(--forest), var(--sage)); }
+  .inst-icon.undergrad { background: linear-gradient(135deg, var(--crimson), #a04060); }
+  .inst-icon.forms { background: var(--gold); }
+  .inst-card h4 { font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; color: var(--forest); margin-bottom: 6px; }
+  .inst-card p { font-size: .85rem; color: var(--mid); line-height: 1.6; }
+  .inst-prices { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+  .ip-pill { font-family: 'Cinzel', serif; font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; }
+  .ip-pill.green { background: rgba(26,74,46,.1); color: var(--forest); border: 1px solid rgba(26,74,46,.2); }
+  .ip-pill.red { background: rgba(122,30,46,.1); color: var(--crimson); border: 1px solid rgba(122,30,46,.2); }
+  .inst-cta-area { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-forest { background: var(--forest); color: var(--white); font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 13px 26px; border-radius: 3px; text-decoration: none; transition: background .2s; }
+  .btn-forest:hover { background: var(--sage); }
+  .btn-outline-forest { background: transparent; color: var(--forest); font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 13px 26px; border-radius: 3px; text-decoration: none; border: 2px solid var(--forest); transition: all .2s; }
+  .btn-outline-forest:hover { background: var(--forest); color: var(--white); }
+
+  /* TREE TOPPER POINTS */
+  .points-section { background: var(--white); overflow: hidden; }
+  .points-layout { display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center; }
+  .points-visual { background: linear-gradient(135deg, var(--hunter), var(--forest)); border-radius: 10px; padding: 40px 36px; position: relative; overflow: hidden; order: 2; }
+  .points-visual::before { content: '🌲'; position: absolute; right: -20px; bottom: -20px; font-size: 10rem; opacity: .07; pointer-events: none; line-height: 1; }
+  .pv-top { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+  .pv-logo { width: 52px; height: 52px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; box-shadow: 0 4px 14px rgba(184,152,42,.4); }
+  .pv-title { font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 700; color: var(--white); }
+  .pv-sub { font-size: .8rem; color: rgba(255,255,255,.6); margin-top: 2px; }
+  .points-meter { margin-bottom: 24px; }
+  .pm-label { font-size: .78rem; color: rgba(255,255,255,.55); margin-bottom: 6px; }
+  .pm-bar { height: 10px; background: rgba(255,255,255,.1); border-radius: 5px; overflow: hidden; }
+  .pm-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+  .pm-val { font-family: 'EB Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold-lt); margin-top: 6px; }
+  .earn-ways { display: flex; flex-direction: column; gap: 10px; }
+  .ew-row { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; }
+  .ew-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .ew-text { font-size: .84rem; color: rgba(255,255,255,.8); flex: 1; }
+  .ew-pts { font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: var(--gold-lt); white-space: nowrap; }
+  .points-content { order: 1; }
+  .points-content h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 16px; }
+  .points-content p { font-size: .96rem; color: var(--mid); line-height: 1.75; font-weight: 300; margin-bottom: 24px; }
+  .redeem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .redeem-item { background: var(--cream); border: 1px solid var(--border); border-radius: 4px; padding: 16px; text-align: center; border-top: 3px solid var(--gold); }
+  .ri-icon { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+  .ri-label { font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700; color: var(--forest); letter-spacing: .06em; text-transform: uppercase; }
+  .ri-val { font-size: .8rem; color: var(--mid); margin-top: 4px; }
+
+  /* SCHOLARSHIPS */
+  .scholarship-band { background: var(--crimson); padding: 60px 24px; position: relative; overflow: hidden; color: var(--white); }
+  .scholarship-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.07) 0%, transparent 60%); }
+  .sb-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .sb-content h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 16px; line-height: 1.25; }
+  .sb-content p { font-size: .96rem; color: rgba(255,255,255,.8); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+  .sb-awards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .sb-award { display: flex; gap: 16px; align-items: center; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 4px; padding: 14px 18px; }
+  .sb-award-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .sb-award h4 { font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
+  .sb-award p { font-size: .82rem; color: rgba(255,255,255,.7); }
+  .btn-white { display: inline-block; background: var(--white); color: var(--crimson); font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 13px 28px; border-radius: 3px; text-decoration: none; transition: all .2s; }
+  .btn-white:hover { background: var(--gold-pale); }
+  .donate-card { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 6px; padding: 32px 28px; backdrop-filter: blur(8px); }
+  .donate-card h3 { font-family: 'Cinzel', serif; font-size: .9rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 20px; }
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .amount-btn { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: var(--white); font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; padding: 12px; border-radius: 3px; cursor: pointer; transition: all .2s; text-align: center; }
+  .amount-btn.selected, .amount-btn:hover { background: var(--white); color: var(--crimson); border-color: var(--white); }
+  .custom-input { width: 100%; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: var(--white); font-family: 'Cinzel', serif; font-size: .9rem; font-weight: 700; padding: 12px 14px; border-radius: 3px; outline: none; margin-bottom: 14px; }
+  .custom-input::placeholder { color: rgba(255,255,255,.4); }
+  .custom-input:focus { border-color: var(--gold-lt); }
+  .donate-submit { width: 100%; background: var(--gold); color: var(--hunter); font-family: 'Cinzel', serif; font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 14px; border-radius: 3px; border: none; cursor: pointer; transition: background .2s; }
+  .donate-submit:hover { background: var(--gold-lt); }
+  .donate-note { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: 10px; text-align: center; }
+
+  /* STUDENT FORM */
+  .form-section { background: var(--cream); }
+  .form-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .form-intro h2 { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 16px; }
+  .form-intro p { font-size: .96rem; color: var(--mid); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+  .form-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .fs-step { display: flex; gap: 14px; align-items: flex-start; }
+  .fs-num { width: 32px; height: 32px; border-radius: 50%; background: var(--forest); color: var(--white); font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .fs-text h4 { font-size: .9rem; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+  .fs-text p { font-size: .84rem; color: var(--mid); }
+  .form-card { background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .fc-header { background: var(--forest); color: var(--white); padding: 22px 26px; }
+  .fc-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; }
+  .fc-header p { font-size: .83rem; color: rgba(255,255,255,.7); margin-top: 4px; }
+  .fc-body { padding: 26px; }
+  .form-row { margin-bottom: 16px; }
+  .form-row label { display: block; font-size: .8rem; font-weight: 700; color: var(--charcoal); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 5px; }
+  .form-input, .form-select, .form-textarea { width: 100%; background: var(--cream); border: 1px solid rgba(0,0,0,.12); color: var(--charcoal); font-family: 'Source Sans 3', sans-serif; font-size: .9rem; padding: 10px 12px; border-radius: 3px; outline: none; transition: border-color .2s; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--forest); background: var(--white); }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit { width: 100%; background: var(--forest); color: var(--white); font-family: 'Cinzel', serif; font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 14px; border-radius: 3px; border: none; cursor: pointer; transition: background .2s; margin-top: 6px; }
+  .form-submit:hover { background: var(--sage); }
+  .form-submit:disabled { background: var(--light); cursor: wait; }
+  .required-mark { color: var(--crimson); }
+  .privacy-notice { background: var(--gold-pale); border: 1px solid rgba(184,152,42,.3); border-left: 4px solid var(--gold); border-radius: 0 4px 4px 0; padding: 14px 16px; margin: 4px 0 16px; color: var(--mid); font-size: .78rem; line-height: 1.6; }
+  .privacy-notice p + p { margin-top: 6px; }
+  .consent-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+  .consent-row input { width: 17px; height: 17px; margin-top: 3px; accent-color: var(--forest); flex-shrink: 0; }
+  .consent-row label { color: var(--charcoal); font-size: .82rem; line-height: 1.55; cursor: pointer; }
+  .form-status { border-radius: 3px; padding: 11px 13px; margin-top: 14px; font-size: .84rem; line-height: 1.5; }
+  .form-status.success { background: rgba(26,74,46,.1); border: 1px solid rgba(26,74,46,.25); color: var(--forest); }
+  .form-status.error { background: rgba(122,30,46,.08); border: 1px solid rgba(122,30,46,.25); color: var(--crimson); }
+  .honeypot-field { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+
+  /* BOARD */
+  .board-section { background: var(--white); }
+  .board-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+  .board-card { background: var(--cream); border: 1px solid var(--border); border-radius: 5px; padding: 22px 16px; text-align: center; transition: box-shadow .2s, transform .2s; }
+  .board-card:hover { box-shadow: 0 6px 22px rgba(0,0,0,.09); transform: translateY(-3px); }
+  .board-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--forest), var(--sage)); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); border: 3px solid var(--white); box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+  .board-card.gold-card .board-avatar { background: linear-gradient(135deg, var(--gold), var(--gold-lt)); }
+  .board-card.crimson-card .board-avatar { background: linear-gradient(135deg, var(--crimson), #a04060); }
+  .board-role { font-family: 'Cinzel', serif; font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block; }
+  .board-name { font-family: 'EB Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--charcoal); line-height: 1.3; }
+  .board-affil { font-size: .76rem; color: var(--light); margin-top: 4px; }
+  .bd-label { font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .bd-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .directors-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .dir-card { background: var(--parchment); border: 1px solid var(--border); border-radius: 4px; padding: 16px 14px; display: flex; gap: 12px; align-items: center; }
+  .dir-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: var(--forest); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; color: var(--white); }
+  .dir-role { font-size: .72rem; color: var(--gold); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; display: block; }
+  .dir-name { font-size: .88rem; font-weight: 700; color: var(--charcoal); }
+  .dir-area { font-size: .76rem; color: var(--light); }
+  .board-note { background: var(--gold-pale); border: 1px solid rgba(184,152,42,.3); border-left: 4px solid var(--gold); border-radius: 0 4px 4px 0; padding: 16px 20px; font-size: .88rem; color: var(--charcoal); margin-top: 28px; }
+  .board-note strong { color: var(--forest); }
+
+  /* CTA BAND */
+  .cta-band { background: linear-gradient(135deg, var(--hunter), var(--forest)); padding: 80px 24px; text-align: center; position: relative; overflow: hidden; }
+  .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,152,42,.12) 0%, transparent 60%); }
+  .cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-eyebrow { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+  .cta-band h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 16px; }
+  .cta-band p { font-size: 1rem; color: rgba(255,255,255,.72); font-weight: 300; line-height: 1.75; margin-bottom: 36px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold { background: var(--gold); color: var(--hunter); font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 15px 32px; border-radius: 3px; text-decoration: none; border: 2px solid var(--gold); transition: all .25s; }
+  .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+  .btn-ghost { background: transparent; color: var(--white); font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 15px 32px; border-radius: 3px; text-decoration: none; border: 2px solid rgba(255,255,255,.35); transition: all .25s; }
+  .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+  /* FOOTER */
+  footer { background: var(--hunter); color: rgba(255,255,255,.6); padding: 52px 24px 24px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
+  .footer-brand-p { font-size: .86rem; margin-top: 14px; color: rgba(255,255,255,.48); line-height: 1.7; }
+  .footer-col h4 { font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { font-size: .86rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--gold-lt); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: .77rem; color: rgba(255,255,255,.3); }
+  .footer-bottom a { color: rgba(255,255,255,.35); text-decoration: none; margin-left: 14px; }
+  .footer-bottom a:hover { color: var(--gold-lt); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .tier-grid { grid-template-columns: 1fr 1fr; }
+    .board-grid { grid-template-columns: repeat(3, 1fr); }
+    .directors-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .hero-inner, .inst-layout, .points-layout, .sb-inner, .form-layout { grid-template-columns: 1fr; }
+    .points-visual { order: 0; }
+    .redeem-grid { grid-template-columns: repeat(4, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .tier-grid { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    .board-grid { grid-template-columns: 1fr 1fr; }
+    .directors-grid { grid-template-columns: 1fr; }
+    .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .hero-inner > * { animation: slideUp .65s ease both; }
+  .hero-inner > *:nth-child(2) { animation-delay: .2s; }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <span>The Society of Cannabis in Higher Education — Advancing rigorous scholarship across institutions</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="logo-wrap">
+      <img class="logo-shield" src="CannabisLogo.png" alt="The Society of Cannabis in Higher Education logo">
+      <div class="org-main">The Society of Cannabis in Higher Education</div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="membership.html" class="active" aria-current="page">Membership</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html">Home</a> / Membership</div>
+      <div class="hero-divider"></div>
+      <h1>Become a Member of SCHE</h1>
+      <p class="hero-p">Whether you're a professor, post-doctoral researcher, graduate student, undergrad, or institution, SCHE membership puts cutting-edge cannabis scholarship, a national community, and exclusive rewards at your fingertips.</p>
+      <div class="hero-pills">
+        <a href="#tiers" class="hero-pill">Individual Tiers</a>
+        <a href="#institutional" class="hero-pill">Institutional Plans</a>
+        <a href="#scholarships" class="hero-pill">Scholarships</a>
+        <a href="#board" class="hero-pill">Board &amp; Leadership</a>
+      </div>
+    </div>
+    <div class="hero-strip">
+      <div class="hs-card">
+        <div class="hs-num">$40</div>
+        <div class="hs-label">Undergrad · 1 yr</div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">$70</div>
+        <div class="hs-label">Grad / Post-Doc · 1 yr</div>
+      </div>
+      <div class="hs-card">
+        <div class="hs-num">$600</div>
+        <div class="hs-label">Institutional · 1 yr</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tier-section" id="tiers">
+  <div class="section-inner">
+    <div class="section-label">Membership Plans</div>
+    <h2 class="section-title">Choose Your Membership Tier</h2>
+    <div class="title-rule"></div>
+    <div class="tier-toggle">
+      <button class="tt-btn active" onclick="showTier('individual', this)">Individual</button>
+      <button class="tt-btn" onclick="showTier('institutional', this)">Institutional</button>
+    </div>
+
+    <!-- INDIVIDUAL -->
+    <div class="tier-view active" id="tier-individual">
+      <div class="tier-grid">
+
+        <div class="tier-card popular">
+          <div class="tier-badge forest-badge">Most Accessible</div>
+          <div class="tier-header">
+            <span class="tier-icon">📖</span>
+            <div class="tier-name">Undergraduate</div>
+            <div class="tier-desc">Current undergraduate students at any accredited institution</div>
+          </div>
+          <div class="tier-price-block">
+            <div class="tier-prices">
+              <div class="price-option">
+                <span class="price-duration">1 Year</span>
+                <div class="price-amount"><sup>$</sup>40</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">2 Years</span>
+                <div class="price-amount"><sup>$</sup>70</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">3 Years</span>
+                <div class="price-amount"><sup>$</sup>105</div>
+              </div>
+            </div>
+          </div>
+          <div class="tier-features">
+            <ul>
+              <li><span class="tf-check">✓</span> Instant new-article access</li>
+              <li><span class="tf-check">✓</span> Member research directory</li>
+              <li><span class="tf-check">✓</span> Annual conference member rate</li>
+              <li><span class="tf-check">✓</span> Scholarship award eligibility</li>
+              <li><span class="tf-check">✓</span> Mentorship program access</li>
+              <li><span class="tf-check">✓</span> New article email alerts</li>
+            </ul>
+          </div>
+          <div class="tier-cta-wrap">
+            <a href="#contact-form" class="tier-cta forest">Join — Undergraduate</a>
+          </div>
+        </div>
+
+        <div class="tier-card recommended">
+          <div class="tier-badge gold-badge">Graduate &amp; Faculty</div>
+          <div class="tier-header dark">
+            <span class="tier-icon">🎓</span>
+            <div class="tier-name">Post-Doc &amp; Graduate</div>
+            <div class="tier-desc">Graduate students, doctoral candidates, post-docs, and faculty</div>
+          </div>
+          <div class="tier-price-block">
+            <div class="tier-prices">
+              <div class="price-option">
+                <span class="price-duration">1 Year</span>
+                <div class="price-amount"><sup>$</sup>70</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">2 Years</span>
+                <div class="price-amount"><sup>$</sup>120</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">3 Years</span>
+                <div class="price-amount"><sup>$</sup>180</div>
+              </div>
+            </div>
+          </div>
+          <div class="tier-features">
+            <ul>
+              <li><span class="tf-check">✓</span> Instant new-article access</li>
+              <li><span class="tf-check">✓</span> Member research directory</li>
+              <li><span class="tf-check">✓</span> Annual conference member rate</li>
+              <li><span class="tf-check">✓</span> Journal submission rights</li>
+              <li><span class="tf-check">✓</span> Event creation &amp; submission</li>
+              <li><span class="tf-check">✓</span> Voting &amp; governance rights</li>
+            </ul>
+          </div>
+          <div class="tier-cta-wrap">
+            <a href="#contact-form" class="tier-cta gold">Join — Post-Doc / Grad</a>
+          </div>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-header">
+            <span class="tier-icon">🏢</span>
+            <div class="tier-name">Professional &amp; Industry</div>
+            <div class="tier-desc">Business leaders, practitioners, and industry professionals</div>
+          </div>
+          <div class="tier-price-block">
+            <div class="tier-prices">
+              <div class="price-option">
+                <span class="price-duration">1 Year</span>
+                <div class="price-amount"><sup>$</sup>120</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">2 Years</span>
+                <div class="price-amount"><sup>$</sup>200</div>
+              </div>
+            </div>
+          </div>
+          <div class="tier-features">
+            <ul>
+              <li><span class="tf-check">✓</span> Instant article access</li>
+              <li><span class="tf-check">✓</span> Featured member directory listing</li>
+              <li><span class="tf-check">✓</span> Industry–academia networking events</li>
+              <li><span class="tf-check">✓</span> Event creation &amp; promotion</li>
+              <li><span class="tf-check">✓</span> Policy briefing &amp; co-branding access</li>
+            </ul>
+          </div>
+          <div class="tier-cta-wrap">
+            <a href="#contact-form" class="tier-cta outline">Join — Professional</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INSTITUTIONAL -->
+    <div class="tier-view" id="tier-institutional">
+      <div class="tier-grid">
+
+        <div class="tier-card popular">
+          <div class="tier-badge forest-badge">Undergrad Block</div>
+          <div class="tier-header">
+            <span class="tier-icon">📚</span>
+            <div class="tier-name">Undergraduate Block</div>
+            <div class="tier-desc">Give your undergraduate students access — bulk pricing for departments and programs</div>
+          </div>
+          <div class="tier-price-block">
+            <div class="tier-prices">
+              <div class="price-option">
+                <span class="price-duration">1 Year Block</span>
+                <div class="price-amount"><sup>$</sup>300</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">2 Year Block</span>
+                <div class="price-amount"><sup>$</sup>500</div>
+              </div>
+            </div>
+          </div>
+          <div class="tier-features">
+            <ul>
+              <li><span class="tf-check">✓</span> Block of memberships for enrolled undergrads</li>
+              <li><span class="tf-check">✓</span> All individual undergraduate benefits</li>
+              <li><span class="tf-check">✓</span> Student info submission forms provided</li>
+              <li><span class="tf-check">✓</span> Scholarship eligibility for all enrolled students</li>
+              <li><span class="tf-check">✓</span> Institutional co-branding on SCHE site</li>
+            </ul>
+          </div>
+          <div class="tier-cta-wrap">
+            <a href="#contact-form" class="tier-cta forest">Request a Quote</a>
+          </div>
+        </div>
+
+        <div class="tier-card recommended">
+          <div class="tier-badge gold-badge">Grad Block</div>
+          <div class="tier-header dark">
+            <span class="tier-icon">🏛️</span>
+            <div class="tier-name">Post-Doc &amp; Grad Block</div>
+            <div class="tier-desc">Block memberships for graduate and post-doctoral programs — 2 year max discount</div>
+          </div>
+          <div class="tier-price-block">
+            <div class="tier-prices">
+              <div class="price-option">
+                <span class="price-duration">1 Year Block</span>
+                <div class="price-amount"><sup>$</sup>600</div>
+              </div>
+              <div class="price-divider">·</div>
+              <div class="price-option">
+                <span class="price-duration">2 Year Block</span>
+                <div class="price-amount"><sup>$</sup>1000</div>
+              </div>
+            </div>
+          </div>
+          <div class="tier-features">
+            <ul>
+              <li><span class="tf-check">✓</span> Block of memberships for your department</li>
+              <li><span class="tf-check">✓</span> All post-doc/grad benefits included</li>
+              <li><span class="tf-check">✓</span> Centralized billing &amp; admin dashboard</li>
+              <li><span class="tf-check">✓</span> Institutional listing on SCHE partner page</li>
+              <li><span class="tf-check">✓</span> Priority event co-hosting opportunities</li>
+            </ul>
+          </div>
+          <div class="tier-cta-wrap">
+            <a href="#contact-form" class="tier-cta gold">Request a Quote</a>
+          </div>
+        </div>
+
+        <div class="tier-card" style="background:var(--forest); display:flex; flex-direction:column; justify-content:center;">
+          <div style="padding:32px 26px;">
+            <span style="font-size:2rem;display:block;margin-bottom:14px;">🌿</span>
+            <div style="font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold-lt);margin-bottom:12px;">Give Your Students Access to Us</div>
+            <p style="font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:20px;">Block memberships let you enroll an entire cohort at a significant discount — <strong style="color:var(--gold-lt);">2 years for less than the cost of 3 individual plans.</strong></p>
+            <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:16px 18px;margin-bottom:20px;">
+              <div style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:8px;">Included with all institutional plans</div>
+              <div style="font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.65;">Student info forms · Admin billing · Partner page listing · Priority support</div>
+            </div>
+            <a href="#contact-form" style="display:block;text-align:center;background:var(--gold);color:var(--hunter);font-family:'Cinzel',serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:13px;border-radius:3px;text-decoration:none;">Contact Us About Institutional Plans</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTIONAL DETAILS -->
+<section class="inst-section" id="institutional">
+  <div class="section-inner">
+    <div class="inst-layout">
+      <div class="inst-content">
+        <div class="section-label">For Departments &amp; Programs</div>
+        <h2>Institutional Membership Plans</h2>
+        <div class="title-rule"></div>
+        <p>SCHE institutional block memberships are designed for department chairs, program directors, and student affairs professionals who want to bring cannabis scholarship resources to their students and faculty without per-student billing complexity.</p>
+        <div class="inst-cta-area">
+          <a href="#contact-form" class="btn-forest">Request Institutional Quote</a>
+        </div>
+      </div>
+      <div class="inst-cards">
+        <div class="inst-card">
+          <div class="inst-icon grad">🎓</div>
+          <div>
+            <h4>Post-Doc &amp; Graduate Block</h4>
+            <p>For graduate programs, research labs, and post-doctoral departments. All faculty-tier benefits for available for up to 10 members.</p>
+            <div class="inst-prices">
+              <span class="ip-pill green">$600 / 1 yr</span>
+              <span class="ip-pill green">$1,000 / 2 yrs</span>
+            </div>
+          </div>
+        </div>
+        <div class="inst-card">
+          <div class="inst-icon undergrad">📖</div>
+          <div>
+            <h4>Undergraduate Block</h4>
+            <p>For undergraduate programs, student affairs offices, and campus chapters. Student-tier benefits for up to 10 members.</p>
+            <div class="inst-prices">
+              <span class="ip-pill red">$300 / 1 yr</span>
+              <span class="ip-pill red">$500 / 2 yrs</span>
+            </div>
+          </div>
+        </div>
+        <div class="inst-card" style="background:var(--gold-pale);border-color:rgba(184,152,42,.25);">
+          <div class="inst-icon forms">📋</div>
+          <div>
+            <h4 style="color:var(--gold);">Student Info Submission Forms</h4>
+            <p>Institutions receive a simple form to submit enrolled student information.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TREE TOPPER POINTS -->
+<!-- <section class="points-section" id="points">
+  <div class="section-inner">
+    <div class="points-layout">
+      <div class="points-content">
+        <div class="section-label">Rewards Program</div>
+        <h2>🌲 Tree Topper Points</h2>
+        <div class="title-rule"></div>
+        <p>Every time you publish, create, present, or contribute to SCHE — you earn <strong>Tree Topper Points</strong>. Redeem them for discounts on membership, exclusive Society merchandise, and event registration.</p>
+        <p>Tree Topper Points reward the members who make SCHE stronger. The more you give to the community, the more you get back.</p>
+        <div class="redeem-grid">
+          <div class="redeem-item">
+            <span class="ri-icon">🏷️</span>
+            <div class="ri-label">Membership Discount</div>
+            <div class="ri-val">Redeem at renewal</div>
+          </div>
+          <div class="redeem-item">
+            <span class="ri-icon">👕</span>
+            <div class="ri-label">SCHE Merch</div>
+            <div class="ri-val">Apparel &amp; goods</div>
+          </div>
+          <div class="redeem-item">
+            <span class="ri-icon">🎟️</span>
+            <div class="ri-label">Event Access</div>
+            <div class="ri-val">Conference tickets</div>
+          </div>
+          <div class="redeem-item">
+            <span class="ri-icon">📚</span>
+            <div class="ri-label">Course Credits</div>
+            <div class="ri-val">Bonus course access</div>
+          </div>
+        </div>
+        <a href="#contact-form" class="btn-forest">Contact SCHE About Points</a>
+      </div>
+      <div class="points-visual">
+        <div class="pv-top">
+          <div class="pv-logo">🌲</div>
+          <div>
+            <div class="pv-title">Tree Topper Points</div>
+            <div class="pv-sub">Example Member Balance</div>
+          </div>
+        </div>
+        <div class="points-meter">
+          <div class="pm-label">Current balance</div>
+          <div class="pm-bar"><div class="pm-fill" style="width:62%"></div></div>
+          <div class="pm-val">620 pts</div>
+        </div>
+        <div class="earn-ways">
+          <div class="ew-row">
+            <span class="ew-icon">✍️</span>
+            <span class="ew-text">Publish an article or paper with SCHE</span>
+            <span class="ew-pts">+200 pts</span>
+          </div>
+          <div class="ew-row">
+            <span class="ew-icon">🎨</span>
+            <span class="ew-text">Create content for SCHE (graphic, video, resource)</span>
+            <span class="ew-pts">+100 pts</span>
+          </div>
+          <div class="ew-row">
+            <span class="ew-icon">🎤</span>
+            <span class="ew-text">Present at an SCHE event or conference</span>
+            <span class="ew-pts">+150 pts</span>
+          </div>
+          <div class="ew-row">
+            <span class="ew-icon">📅</span>
+            <span class="ew-text">Attend the SCHE annual meeting</span>
+            <span class="ew-pts">+50 pts</span>
+          </div>
+          <div class="ew-row">
+            <span class="ew-icon">🤝</span>
+            <span class="ew-text">Refer a new member who joins SCHE</span>
+            <span class="ew-pts">+75 pts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- SCHOLARSHIPS -->
+<div class="scholarship-band" id="scholarships">
+  <div class="sb-inner">
+    <div class="sb-content">
+      <div style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:10px;">Student Support</div>
+      <h2>Scholarships &amp; Travel Awards</h2>
+      <p>SCHE awards funds to graduate and undergraduate members to support meeting attendance, conference travel, and research presentations. Donations from the SCHE community directly fund these awards.</p>
+      <div class="sb-awards">
+        <div class="sb-award">
+          <span class="sb-award-icon">🎓</span>
+          <div>
+            <h4>Graduate Meeting Attendance Award</h4>
+            <p>Funds for graduate students to attend the SCHE Annual Meeting — covering registration, travel, and lodging.</p>
+          </div>
+        </div>
+        <div class="sb-award">
+          <span class="sb-award-icon">📖</span>
+          <div>
+            <h4>Undergraduate Scholarship Fund</h4>
+            <p>Awards for undergraduate members demonstrating academic merit and commitment to cannabis scholarship.</p>
+          </div>
+        </div>
+        <div class="sb-award">
+          <span class="sb-award-icon">🏆</span>
+          <div>
+            <h4>Outstanding Research Presentation Award</h4>
+            <p>Recognizes the best student research presentations at the annual conference across all academic levels.</p>
+          </div>
+        </div>
+      </div>
+      <a href="#contact-form" class="btn-white">Apply for a Scholarship</a>
+    </div>
+    <div class="donate-card">
+      <h3>Donate to Student Scholarships</h3>
+      <div class="amount-grid">
+        <div class="amount-btn selected" onclick="selectAmount(this)">$25</div>
+        <div class="amount-btn" onclick="selectAmount(this)">$50</div>
+        <div class="amount-btn" onclick="selectAmount(this)">$100</div>
+        <div class="amount-btn" onclick="selectAmount(this)">$250</div>
+        <div class="amount-btn" onclick="selectAmount(this)">$500</div>
+        <div class="amount-btn" onclick="selectAmount(this)">Other</div>
+      </div>
+      <input type="text" class="custom-input" placeholder="Custom amount ($)" id="custom-amount" style="display:none;">
+      <button class="donate-submit">Donate to Student Scholarships</button>
+      <div class="donate-note">All donations support graduate and undergraduate award funds. SCHE is a registered nonprofit organization.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENT FORM -->
+<section class="form-section" id="contact-form">
+  <div class="section-inner">
+    <div class="form-layout">
+      <div class="form-intro">
+        <div class="section-label">Get Started</div>
+        <h2>Member Information &amp; Enrollment Form</h2>
+        <div class="title-rule"></div>
+        <p>Submit your information for individual membership, institutional block enrollment, scholarship applications, or general inquiries. Our team will follow up within 2 business days.</p>
+        <div class="form-steps">
+          <div class="fs-step">
+            <div class="fs-num">1</div>
+            <div class="fs-text">
+              <h4>Submit your information</h4>
+              <p>Complete the form with your details and membership needs.</p>
+            </div>
+          </div>
+          <div class="fs-step">
+            <div class="fs-num">2</div>
+            <div class="fs-text">
+              <h4>SCHE processes your request</h4>
+              <p>Our team confirms your tier</p>
+            </div>
+          </div>
+          <div class="fs-step">
+            <div class="fs-num">3</div>
+            <div class="fs-text">
+              <h4>Membership activated and validated</h4>
+              <p>After Memberhip tier is confirmed, our team validates your tier and returns a response with more information</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="form-card" id="membershipForm" action="/api/membership" method="POST">
+        <div class="fc-header">
+          <h3>Member Information Form</h3>
+          <p>For individual, institutional enrollment, scholarships, or general inquiries</p>
+        </div>
+        <div class="fc-body">
+          <div class="honeypot-field" aria-hidden="true">
+            <label for="website">Leave this field blank</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label for="firstName">First Name <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" class="form-input" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name" maxlength="80" required>
+            </div>
+            <div class="form-row">
+              <label for="lastName">Last Name <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" class="form-input" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name" maxlength="80" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="email">Email Address <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" class="form-input" id="email" name="email" placeholder="jane.smith@university.edu" autocomplete="email" maxlength="254" required>
+          </div>
+          <div class="form-row">
+            <label for="institution">Institution / University <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="text" class="form-input" id="institution" name="institution" placeholder="University Name" autocomplete="organization" maxlength="160" required>
+          </div>
+          <div class="form-row-2">
+            <div class="form-row">
+              <label for="academicLevel">Academic Level <span class="required-mark" aria-hidden="true">*</span></label>
+              <select class="form-select" id="academicLevel" name="academicLevel" required>
+                <option value="">Select level...</option>
+                <option value="undergraduate">Undergraduate</option>
+                <option value="graduate">Graduate (MA/MS)</option>
+                <option value="doctoral">Doctoral (PhD)</option>
+                <option value="postdoctoral">Post-Doctoral</option>
+                <option value="faculty">Faculty</option>
+                <option value="industry-professional">Industry Professional</option>
+                <option value="institutional-contact">Institutional Contact</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="inquiryType">Inquiry Type <span class="required-mark" aria-hidden="true">*</span></label>
+              <select class="form-select" id="inquiryType" name="inquiryType" required>
+                <option value="">Select type...</option>
+                <option value="individual-membership">Individual Membership</option>
+                <option value="institutional-block">Institutional Block</option>
+                <option value="scholarship-inquiry">Scholarship Inquiry</option>
+                <option value="general-question">General Question</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="message">Message / Notes <span class="required-mark" aria-hidden="true">*</span></label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your needs or any questions about membership..." maxlength="2000" required></textarea>
+          </div>
+
+          <div class="privacy-notice">
+            <p>SCHE collects the information in this form to process and respond to your request. It may be shared with authorized SCHE personnel and service providers that host the website or deliver email on our behalf. SCHE will not use this submission for marketing without separate permission.</p>
+            <p>Do not submit Social Security numbers, payment information, passwords, medical or health information, disability information, confidential student records, or other sensitive personal information through this form.</p>
+          </div>
+
+          <div class="consent-row">
+            <input type="checkbox" id="privacyAcknowledgment" name="privacyAcknowledgment" value="accepted" required>
+            <label for="privacyAcknowledgment">I have read the Privacy Notice and authorize SCHE to use the submitted information to process and respond to my request. <span class="required-mark" aria-hidden="true">*</span></label>
+          </div>
+
+          <button class="form-submit" id="membershipSubmit" type="submit">Submit Information →</button>
+          <div class="form-status" id="membershipFormStatus" role="status" aria-live="polite" hidden></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- BOARD -->
+<section class="board-section" id="board">
+  <div class="section-inner">
+    <div class="section-label">Leadership</div>
+    <h2 class="section-title">Board of Directors</h2>
+    <div class="title-rule"></div>
+    <p class="section-intro">SCHE is governed by an elected board of scholars, educators, and practitioners. Leadership positions include President, VP, Secretary, Treasurer, Directors, and Journal Editor.</p>
+
+    <div class="board-grid">
+      <div class="board-card gold-card">
+        <div class="board-avatar">P</div>
+        <span class="board-role">President</span>
+        <div class="board-name">Position Open</div>
+        <div class="board-affil">Nominations Welcome</div>
+      </div>
+      <div class="board-card">
+        <div class="board-avatar">VP</div>
+        <span class="board-role">Vice President</span>
+        <div class="board-name">Position Open</div>
+        <div class="board-affil">Nominations Welcome</div>
+      </div>
+      <div class="board-card">
+        <div class="board-avatar">S</div>
+        <span class="board-role">Secretary</span>
+        <div class="board-name">Position Open</div>
+        <div class="board-affil">Nominations Welcome</div>
+      </div>
+      <div class="board-card">
+        <div class="board-avatar">T</div>
+        <span class="board-role">Treasurer</span>
+        <div class="board-name">Position Open</div>
+        <div class="board-affil">Nominations Welcome</div>
+      </div>
+      <div class="board-card crimson-card">
+        <div class="board-avatar">JE</div>
+        <span class="board-role">Journal Editor</span>
+        <div class="board-name">Position Open</div>
+        <div class="board-affil">Journal Coming Soon</div>
+      </div>
+    </div>
+
+    <div class="bd-label">Directors &amp; Committee Chairs</div>
+    <div class="directors-grid">
+      <div class="dir-card">
+        <div class="dir-avatar">D</div>
+        <div>
+          <span class="dir-role">Director</span>
+          <div class="dir-name">Research &amp; Publications</div>
+          <div class="dir-area">Position Open</div>
+        </div>
+      </div>
+      <div class="dir-card">
+        <div class="dir-avatar">D</div>
+        <div>
+          <span class="dir-role">Director</span>
+          <div class="dir-name">Membership &amp; Outreach</div>
+          <div class="dir-area">Position Open</div>
+        </div>
+      </div>
+      <div class="dir-card">
+        <div class="dir-avatar">D</div>
+        <div>
+          <span class="dir-role">Director</span>
+          <div class="dir-name">Events &amp; Conferences</div>
+          <div class="dir-area">Position Open</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="board-note">
+      <strong>Interested in serving on the SCHE Board?</strong> SCHE is actively building its founding leadership team. If you are a scholar, educator, practitioner, or industry leader passionate about cannabis in higher education, we invite you to <a href="#contact-form" style="color:var(--forest);font-weight:700;">reach out about board nominations</a>.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<!-- <div class="cta-band">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Ready to Join?</div>
+    <h2>Join SCHE &amp; Start Earning Tree Topper Points Today</h2>
+    <p>Membership is processed through Brightspace. Choose your tier, complete enrollment, and gain instant access to every benefit SCHE offers — courses, articles, community, and rewards.</p>
+    <div class="cta-actions">
+      <a href="#contact-form" class="btn-gold">Join through the Membership Form →</a>
+      <a href="#contact-form" class="btn-ghost">Contact the Society</a>
+    </div>
+  </div>
+</div> -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="org-main" style="color:var(--white);">The Society of Cannabis in Higher Education</div>
+        <p class="footer-brand-p">SCHE unites scholars, educators, practitioners, and advocates advancing evidence-based cannabis scholarship across American higher education.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Membership</h4>
+        <ul>
+          <li><a href="#tiers">Individual Tiers</a></li>
+          <li><a href="#institutional">Institutional Plans</a></li>
+          <li><a href="#scholarships">Scholarships</a></li>
+          <li><a href="#contact-form">Forms &amp; Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Society</h4>
+        <ul>
+          <li><a href="about.html">About SCHE</a></li>
+          <li><a href="#board">Board of Directors</a></li>
+          <li><a href="index.html#initiatives">Research</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="#scholarships">Donate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#contact-form">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Society of Cannabis in Higher Education. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showTier(id, btn) {
+    document.querySelectorAll('.tier-view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tt-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tier-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function selectAmount(el) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    const custom = document.getElementById('custom-amount');
+    custom.style.display = el.textContent === 'Other' ? 'block' : 'none';
+  }
+
+  const membershipForm = document.getElementById('membershipForm');
+  const membershipSubmit = document.getElementById('membershipSubmit');
+  const membershipFormStatus = document.getElementById('membershipFormStatus');
+
+  function showMembershipStatus(message, type) {
+    membershipFormStatus.textContent = message;
+    membershipFormStatus.className = 'form-status ' + type;
+    membershipFormStatus.hidden = false;
+  }
+
+  membershipForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    membershipFormStatus.hidden = true;
+
+    if (!membershipForm.checkValidity()) {
+      membershipForm.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(membershipForm);
+    const payload = {
+      firstName: formData.get('firstName').trim(),
+      lastName: formData.get('lastName').trim(),
+      email: formData.get('email').trim(),
+      institution: formData.get('institution').trim(),
+      academicLevel: formData.get('academicLevel'),
+      inquiryType: formData.get('inquiryType'),
+      message: formData.get('message').trim(),
+      privacyAcknowledgment: formData.get('privacyAcknowledgment') === 'accepted',
+      website: formData.get('website')
+    };
+
+    membershipSubmit.disabled = true;
+    membershipSubmit.textContent = 'Submitting…';
+
+    try {
+      const response = await fetch(membershipForm.action, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (_) {
+        result = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Your information could not be submitted. Please try again.');
+      }
+
+      membershipForm.reset();
+      showMembershipStatus(result.message || 'Thank you. Your information was submitted successfully, and a confirmation email is on its way.', 'success');
+    } catch (error) {
+      showMembershipStatus(error.message || 'Your information could not be submitted. Please try again later.', 'error');
+    } finally {
+      membershipSubmit.disabled = false;
+      membershipSubmit.textContent = 'Submit Information →';
+    }
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.tier-card, .inst-card, .sb-award, .board-card, .dir-card, .ew-row, .redeem-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Society of Cannabis in Higher Education</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --green:#3f5d3d;
+      --dark-green:#23412f;
+      --gold:#b79a58;
+      --burgundy:#7d2135;
+      --cream:#f8f6f1;
+      --light:#ffffff;
+      --text:#2e2e2e;
+      --soft-border:#e4dfd2;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter', sans-serif;
+      background:var(--cream);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* NAVIGATION */
+
+    .navbar{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:rgba(248,246,241,0.95);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--soft-border);
+      z-index:1000;
+    }
+
+    .nav-container{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 0;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-mark{
+      width:68px;
+      height:auto;
+      display:block;
+      flex-shrink:0;
+    }
+
+    .logo-text{
+      font-family:'Cormorant Garamond', serif;
+      color:var(--green);
+      font-size:1.5rem;
+      font-weight:700;
+      line-height:1.1;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:2rem;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:var(--dark-green);
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--burgundy);
+    }
+
+    .btn{
+      background:var(--burgundy);
+      color:white;
+      padding:0.8rem 1.5rem;
+      border-radius:4px;
+      transition:0.3s;
+      display:inline-block;
+      font-weight:600;
+    }
+
+    .btn:hover{
+      background:#611828;
+      transform:translateY(-2px);
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      background:
+        linear-gradient(rgba(35,65,47,0.72), rgba(35,65,47,0.72)),
+        url('https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      color:white;
+      padding-top:80px;
+    }
+
+    .hero-content{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:4rem;
+      align-items:center;
+    }
+
+    .hero h1{
+      font-family:'Cormorant Garamond', serif;
+      font-size:5rem;
+      line-height:1;
+      margin-bottom:1.5rem;
+      font-weight:700;
+    }
+
+    .hero h1 span{
+      color:#e3c98a;
+    }
+
+    .hero p{
+      font-size:1.2rem;
+      max-width:700px;
+      margin-bottom:2rem;
+      color:#f2f2f2;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .btn-outline{
+      border:1px solid white;
+      padding:0.8rem 1.5rem;
+      border-radius:4px;
+      transition:0.3s;
+      font-weight:600;
+    }
+
+    .btn-outline:hover{
+      background:white;
+      color:var(--dark-green);
+    }
+
+    .mission-card{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.18);
+      padding:2rem;
+      border-radius:18px;
+      backdrop-filter:blur(14px);
+    }
+
+    .mission-card h3{
+      font-family:'Cormorant Garamond', serif;
+      font-size:2rem;
+      margin-bottom:1.2rem;
+      color:#f6deb1;
+    }
+
+    .mission-item{
+      margin-bottom:1.3rem;
+      padding-left:1rem;
+      border-left:3px solid var(--gold);
+    }
+
+    .mission-item strong{
+      display:block;
+      color:white;
+      margin-bottom:0.2rem;
+    }
+
+    /* SECTIONS */
+
+    section{
+      padding:6rem 0;
+    }
+
+    .container{
+      width:90%;
+      max-width:1300px;
+      margin:auto;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:4rem;
+    }
+
+    .section-title h2{
+      font-family:'Cormorant Garamond', serif;
+      font-size:3.3rem;
+      color:var(--green);
+      margin-bottom:1rem;
+    }
+
+    .section-title p{
+      max-width:750px;
+      margin:auto;
+      color:#555;
+      font-size:1.05rem;
+    }
+
+    /* FEATURES */
+
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:2rem;
+    }
+
+    .feature-card{
+      background:white;
+      border:1px solid var(--soft-border);
+      padding:2.2rem;
+      border-radius:18px;
+      transition:0.35s;
+    }
+
+    .feature-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    }
+
+    .feature-number{
+      font-family:'Cormorant Garamond', serif;
+      color:var(--gold);
+      font-size:3rem;
+      font-weight:700;
+      margin-bottom:1rem;
+    }
+
+    .feature-card h3{
+      color:var(--green);
+      margin-bottom:1rem;
+      font-size:1.3rem;
+    }
+
+    /* ABOUT */
+
+    .about{
+      background:white;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center;
+    }
+
+    .about-image{
+      height:550px;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    .about-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .about-content h2{
+      font-family:'Cormorant Garamond', serif;
+      font-size:3rem;
+      color:var(--green);
+      margin-bottom:1.5rem;
+    }
+
+    .about-content p{
+      margin-bottom:1.5rem;
+      color:#555;
+    }
+
+    /* STATS */
+
+    .stats{
+      background:var(--green);
+      color:white;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+      gap:2rem;
+      text-align:center;
+    }
+
+    .stat h3{
+      font-size:4rem;
+      color:#f4d89c;
+      font-family:'Cormorant Garamond', serif;
+    }
+
+    .stat p{
+      font-size:1rem;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    /* EVENTS */
+
+    .events-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:2rem;
+    }
+
+    .event-card{
+      background:white;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--soft-border);
+      transition:0.3s;
+    }
+
+    .event-card:hover{
+      transform:translateY(-5px);
+    }
+
+    .event-image{
+      height:220px;
+      overflow:hidden;
+    }
+
+    .event-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .event-content{
+      padding:2rem;
+    }
+
+    .event-date{
+      color:var(--burgundy);
+      font-weight:600;
+      margin-bottom:0.5rem;
+    }
+
+    .event-content h3{
+      color:var(--green);
+      margin-bottom:1rem;
+    }
+
+    /* CTA */
+
+    .cta{
+      background:
+        linear-gradient(rgba(125,33,53,0.88), rgba(125,33,53,0.88)),
+        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      color:white;
+      text-align:center;
+    }
+
+    .cta h2{
+      font-family:'Cormorant Garamond', serif;
+      font-size:3.5rem;
+      margin-bottom:1rem;
+    }
+
+    .cta p{
+      max-width:700px;
+      margin:0 auto 2rem auto;
+      font-size:1.1rem;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#1f2e22;
+      color:#d9d9d9;
+      padding:4rem 0 2rem;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:3rem;
+      margin-bottom:3rem;
+    }
+
+    .footer-logo{
+      font-family:'Cormorant Garamond', serif;
+      color:white;
+      font-size:2rem;
+      margin-bottom:1rem;
+    }
+
+    .footer-links h4{
+      color:#f0d39a;
+      margin-bottom:1rem;
+    }
+
+    .footer-links a{
+      display:block;
+      margin-bottom:0.8rem;
+      color:#d9d9d9;
+    }
+
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,0.12);
+      padding-top:2rem;
+      text-align:center;
+      font-size:0.9rem;
+      color:#bcbcbc;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:950px){
+
+      .hero-content,
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:3.8rem;
+      }
+
+      .nav-links{
+        display:none;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .hero h1{
+        font-size:3rem;
+      }
+
+      .section-title h2,
+      .about-content h2,
+      .cta h2{
+        font-size:2.4rem;
+      }
+
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <a class="logo" href="index.html" aria-label="The Society of Cannabis in Higher Education home">
+        <img class="logo-mark" src="CannabisLogo.png" alt="The Society of Cannabis in Higher Education logo">
+        <div class="logo-text">The Society of Cannabis in Higher Education</div>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="membership.html">Membership</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div>
+        <h1>
+          Advancing <span>Cannabis Education</span>
+          Through Academic Leadership
+        </h1>
+
+        <p>
+          The Society of Cannabis in Higher Education promotes interdisciplinary
+          research, academic collaboration, evidence-based policy discussion,
+          and inclusive educational spaces surrounding cannabis studies in
+          colleges and universities.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="membership.html#contact-form" class="btn">Become a Member</a>
+          <a href="#initiatives" class="btn-outline">Explore Resources</a>
+        </div>
+      </div>
+
+      <div class="mission-card">
+
+        <h3>Our Mission</h3>
+
+        <div class="mission-item">
+          <strong>Pushing Cannabis Forward</strong>
+          The Society of Cannabis in Higher Education is dedicated to advancing knowledge, research, and responsible leadership in the evolving field of cannabis within academic environments. Cannabis is the umberella for medical marijuana and hemp. We strive to foster interdisciplinary collaboration, promote evidence-based education, and support the development of equitable policies that address the social, economic, and health impacts of cannabis. Through scholarship, dialogue, and community engagement, we empower educators, students, and professionals to shape informed, ethical, and innovative approaches to cannabis in higher education and society at large
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section id="initiatives">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Academic Society Initiatives</h2>
+        <p>
+          Inspired by leading scientific and ecological societies, our platform
+          emphasizes scholarship, professional development, interdisciplinary
+          collaboration, and public engagement. 
+        </p>
+      </div>
+
+      <div class="features-grid">
+<!-- for education (that should be firts), then reaserch, then networking, then student dev, then conferences and events -->
+        <div class = "feature-card">
+          <div class="feature-number">01</div>
+          <h3>The Professor Network & Educational Resources</h3>
+          <p>
+            Creating collaborative curricular innovation and curating a comprehensive library of cannabis-related educational
+            resources.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-number">02</div>
+          <h3>Research & Publications</h3>
+          <p>
+            Highlighting emerging cannabis-related scholarship, research, and evidence-based resources.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">03</div>
+          <h3>Professional Networking</h3>
+          <p>
+            Connecting students, educators, scientists, healthcare professionals,
+            and policymakers through collaborative academic opportunities.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">04</div>
+          <h3>Student Development</h3>
+          <p>
+            Hosting symposiums, webinars, workshops, and annual meetings focused
+            on cannabis in higher education.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-number">05</div>
+          <h3>Conferences & Events</h3>
+          <p>
+            Providing mentorship, leadership opportunities, research showcases,
+            and career advancement resources.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="about" id="about">
+
+    <div class="container">
+
+      <div class="about-grid">
+
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating">
+        </div>
+
+        <div class="about-content">
+
+          <h2>Building an Inclusive Academic Community</h2>
+
+          <p>
+            Cannabis research and education continue to expand across disciplines
+            including public health, agriculture, policy, business, environmental
+            science, pharmacology, and social sciences.
+          </p>
+
+          <p>
+            Our society provides a professional home for students, faculty,
+            researchers, and institutions seeking thoughtful, evidence-driven
+            engagement with cannabis in academic spaces.
+          </p>
+          <a href="about.html" class="btn">Learn More</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="container">
+
+      <div class="stats-grid">
+
+        <div class="stat">
+          <h3>Interested in Partnering?</h3>
+          <p>We welcome industry, university, and society partnerships<br> Contact us at <strong>cannabised@roanoke.edu</strong>
+          </p>
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- EVENTS -->
+
+  <section id="events">
+
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Upcoming Programs & Conferences</h2>
+        <p>
+          Academic events focused on interdisciplinary collaboration, student
+          engagement, and emerging cannabis scholarship.
+        </p>
+      </div>
+
+      <div class="events-grid">
+
+        <div class="event-card">
+
+          <div class="event-image">
+            <img src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1200&auto=format&fit=crop" alt="">
+          </div>
+
+          <div class="event-content">
+            <div class="event-date">Coming Soon...</div>
+            <h3>Events for students</h3>
+            <p>
+              Undergraduate and graduate students present innovative cannabis
+              research across multiple disciplines.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="event-card">
+
+          <div class="event-image">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="">
+          </div>
+
+          <div class="event-content">
+            <div class="event-date">Coming Soon...</div>
+            <h3>Events for Academics</h3>
+            <p>
+              Bringing together educators, researchers, and policymakers to
+              discuss the future of cannabis in higher education.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="event-card">
+
+          <div class="event-image">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop" alt="">
+          </div>
+
+          <div class="event-content">
+            <div class="event-date">April 2027</div>
+            <h3>Cannabis Curriculum Convening</h3>
+            <p>
+              Workshops and collaborative discussions focused on curriculum,
+              policy, and campus engagement strategies.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <div class="container">
+
+      <h2>Join the Movement in Higher Education</h2>
+
+      <p>
+        Become part of a growing academic network dedicated to thoughtful,
+        evidence-based cannabis education and interdisciplinary collaboration.
+      </p>
+
+      <a href="membership.html#contact-form" class="btn">Apply for Membership</a>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-logo">
+            The Society of Cannabis in Higher Education
+          </div>
+
+          <p>
+            Advancing research, education, inclusivity, and professional
+            collaboration in cannabis studies across higher education.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Society</h4>
+          <a href="about.html">About</a>
+          <a href="membership.html">Membership</a>
+          <a href="about.html#board">Leadership</a>
+        </div>
+
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <a href="#initiatives">Research</a>
+          <a href="#events">Events</a>
+          <a href="membership.html#contact-form">Contact</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 The Society of Cannabis in Higher Education. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
