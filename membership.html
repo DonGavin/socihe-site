@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Membership | The Society of Cannabis in Higher Education</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://challenges.cloudflare.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
   :root {
     --forest:   #1a4a2e;
@@ -232,6 +234,7 @@
   .consent-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
   .consent-row input { width: 17px; height: 17px; margin-top: 3px; accent-color: var(--forest); flex-shrink: 0; }
   .consent-row label { color: var(--charcoal); font-size: .82rem; line-height: 1.55; cursor: pointer; }
+  .turnstile-row { margin: 2px 0 16px; min-height: 65px; }
   .form-status { border-radius: 3px; padding: 11px 13px; margin-top: 14px; font-size: .84rem; line-height: 1.5; }
   .form-status.success { background: rgba(26,74,46,.1); border: 1px solid rgba(26,74,46,.25); color: var(--forest); }
   .form-status.error { background: rgba(122,30,46,.08); border: 1px solid rgba(122,30,46,.25); color: var(--crimson); }
@@ -867,6 +870,16 @@
             <label for="privacyAcknowledgment">I have read the Privacy Notice and authorize SCHE to use the submitted information to process and respond to my request. <span class="required-mark" aria-hidden="true">*</span></label>
           </div>
 
+          <div class="turnstile-row">
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAEc83yNAHsHqTi9L"
+              data-action="membership"
+              data-theme="auto"
+              data-size="flexible"
+            ></div>
+          </div>
+
           <button class="form-submit" id="membershipSubmit" type="submit">Submit Information →</button>
           <div class="form-status" id="membershipFormStatus" role="status" aria-live="polite" hidden></div>
         </div>
@@ -1038,6 +1051,13 @@
     }
 
     const formData = new FormData(membershipForm);
+    const turnstileToken = formData.get('cf-turnstile-response');
+
+    if (!turnstileToken) {
+      showMembershipStatus('Complete the security verification before submitting.', 'error');
+      return;
+    }
+
     const payload = {
       firstName: formData.get('firstName').trim(),
       lastName: formData.get('lastName').trim(),
@@ -1047,7 +1067,8 @@
       inquiryType: formData.get('inquiryType'),
       message: formData.get('message').trim(),
       privacyAcknowledgment: formData.get('privacyAcknowledgment') === 'accepted',
-      website: formData.get('website')
+      website: formData.get('website'),
+      turnstileToken
     };
 
     membershipSubmit.disabled = true;
@@ -1079,6 +1100,9 @@
     } catch (error) {
       showMembershipStatus(error.message || 'Your information could not be submitted. Please try again later.', 'error');
     } finally {
+      if (window.turnstile) {
+        window.turnstile.reset();
+      }
       membershipSubmit.disabled = false;
       membershipSubmit.textContent = 'Submit Information →';
     }
