@@ -1,4 +1,7 @@
 const MAX_BODY_LENGTH = 12_000;
+const MAX_TURNSTILE_TOKEN_LENGTH = 2_048;
+const TURNSTILE_ACTION = "membership";
+const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 const ACADEMIC_LEVELS = {
   undergraduate: "Undergraduate student",
@@ -60,6 +63,7 @@ function validateSubmission(payload) {
     inquiryType: cleanString(payload.inquiryType, 40),
     message: cleanString(payload.message, 2_000),
     website: cleanString(payload.website, 200),
+    turnstileToken: cleanString(payload.turnstileToken, MAX_TURNSTILE_TOKEN_LENGTH),
     privacyAcknowledgment: payload.privacyAcknowledgment === true,
   };
 
@@ -90,8 +94,55 @@ function validateSubmission(payload) {
   if (!submission.privacyAcknowledgment) {
     errors.push("Confirm the privacy acknowledgment before submitting.");
   }
+  if (!submission.turnstileToken || submission.turnstileToken.length > MAX_TURNSTILE_TOKEN_LENGTH) {
+    errors.push("Complete the security verification before submitting.");
+  }
 
   return { submission, errors };
+}
+
+async function verifyTurnstile(token, request, env, expectedHostname) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10_000);
+
+  try {
+    const response = await fetch(TURNSTILE_VERIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: env.TURNSTILE_SECRET,
+        response: token,
+        remoteip: request.headers.get("CF-Connecting-IP") || undefined,
+        idempotency_key: crypto.randomUUID(),
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      console.error("Turnstile Siteverify returned status", response.status);
+      return { success: false };
+    }
+
+    const result = await response.json();
+    if (!result.success) {
+      console.warn("Turnstile rejected a membership submission.");
+      return { success: false };
+    }
+    if (result.action !== TURNSTILE_ACTION || result.hostname !== expectedHostname) {
+      console.warn("Turnstile validation metadata did not match the membership form request.");
+      return { success: false };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error(
+      "Turnstile validation request failed:",
+      error instanceof Error ? error.name : "UnknownError",
+    );
+    return { success: false };
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 function buildEmails(submission, env, reference, receivedAt) {
@@ -229,11 +280,24 @@ export async function onRequestPost(context) {
     );
   }
 
-  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL || !env.MEMBERSHIP_INBOX) {
+  if (!env.TURNSTILE_SECRET || !env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL || !env.MEMBERSHIP_INBOX) {
     console.error("Membership form email configuration is incomplete.");
     return jsonResponse(
       { success: false, message: "The form is temporarily unavailable. Please try again later." },
       503,
+    );
+  }
+
+  const turnstileResult = await verifyTurnstile(
+    submission.turnstileToken,
+    request,
+    env,
+    requestUrl.hostname,
+  );
+  if (!turnstileResult.success) {
+    return jsonResponse(
+      { success: false, message: "Security verification failed or expired. Please try again." },
+      400,
     );
   }
 
