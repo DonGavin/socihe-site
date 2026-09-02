@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/CannabisLogo.png?v=1">
+<link rel="apple-touch-icon" href="/CannabisLogo.png?v=1">
+<title>The Professor Network | The Society of Cannabis in Higher Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cinzel:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest:   #1a4a2e;
+    --hunter:   #0e3020;
+    --sage:     #3a6b4a;
+    --sage-lt:  #5a8a68;
+    --gold:     #b8982a;
+    --gold-lt:  #d4b84a;
+    --gold-pale:#f5edcf;
+    --crimson:  #7a1e2e;
+    --cream:    #f7f4ef;
+    --parchment:#ede8df;
+    --charcoal: #2a2a2a;
+    --mid:      #555;
+    --light:    #888;
+    --border:   rgba(0,0,0,0.09);
+    --white:    #ffffff;
+    /* Professor Network accent — deep academic slate-teal, distinct from main site */
+    --cpn-teal: #1c4a5a;
+    --cpn-teal-lt: #2a6a7e;
+    --cpn-sky: #e6f2f7;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.7; overflow-x: hidden; }
+
+  /* ── UTILITY BAR ── */
+  .utility-bar { background: var(--hunter); color: rgba(255,255,255,.65); font-size: .78rem; letter-spacing: .04em; padding: 6px 0; }
+  .utility-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: center; align-items: center; text-align: center; }
+  .utility-bar a { color: rgba(255,255,255,.65); text-decoration: none; margin-left: 16px; transition: color .2s; }
+  .utility-bar a:hover { color: var(--gold-lt); }
+  .util-join { background: var(--gold); color: var(--white) !important; padding: 3px 12px; border-radius: 2px; font-weight: 700; }
+
+  /* ── HEADER ── */
+  header { background: var(--white); border-bottom: 3px solid var(--forest); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 32px; height: 72px; }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+  .logo-shield { width: 50px; height: 50px; object-fit: contain; }
+  .org-top { font-family: 'Cinzel', serif; font-size: .62rem; font-weight: 500; color: var(--crimson); letter-spacing: .12em; text-transform: uppercase; }
+  .org-main { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--forest); letter-spacing: .04em; line-height: 1.15; }
+  nav { flex: 1; }
+  nav ul { list-style: none; display: flex; gap: 2px; }
+  nav ul li a { display: block; font-size: .85rem; font-weight: 600; color: var(--charcoal); text-decoration: none; padding: 8px 14px; border-radius: 2px; letter-spacing: .02em; transition: background .2s, color .2s; }
+  nav ul li a:hover { background: var(--parchment); color: var(--forest); }
+  nav ul li a.active { color: var(--forest); border-bottom: 2px solid var(--gold); }
+  .nav-cta { background: var(--forest); color: var(--white) !important; padding: 8px 18px !important; border-radius: 2px; }
+  .nav-cta:hover { background: var(--sage) !important; }
+
+  /* ── Professor Network HERO ── */
+  .cpn-hero {
+    background: linear-gradient(135deg, var(--hunter) 0%, var(--cpn-teal) 50%, var(--cpn-teal-lt) 100%);
+    padding: 80px 24px 70px; position: relative; overflow: hidden; color: var(--white);
+  }
+  .cpn-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(184,152,42,.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 5% 85%, rgba(26,74,46,.25) 0%, transparent 50%);
+  }
+  /* repeating hexagonal grid suggestion */
+  .cpn-hero::after {
+    content: ''; position: absolute; inset: 0; opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='52' viewBox='0 0 60 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,2 58,17 58,47 30,62 2,47 2,17' fill='none' stroke='white' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 52px;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: center; }
+  .breadcrumb { font-size: .78rem; color: rgba(255,255,255,.5); margin-bottom: 16px; letter-spacing: .05em; }
+  .breadcrumb a { color: var(--gold-lt); text-decoration: none; }
+  .cpn-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .cpn-eyebrow-badge { font-family: 'Cinzel', serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); color: var(--gold-lt); padding: 5px 14px; border-radius: 20px; }
+  .cpn-eyebrow-line { flex: 1; height: 1px; background: rgba(255,255,255,.15); }
+  .cpn-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem,4vw,3rem); font-weight: 700; line-height: 1.18; margin-bottom: 10px; }
+  .cpn-hero h1 span { color: var(--gold-lt); display: block; font-size: .75em; font-style: italic; font-family: 'EB Garamond', serif; }
+  .hero-divider { width: 56px; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); margin: 20px 0; }
+  .cpn-hero p { font-size: 1.05rem; color: rgba(255,255,255,.82); font-weight: 300; line-height: 1.8; max-width: 560px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-gold { background: var(--gold); color: var(--hunter); font-family: 'Cinzel', serif; font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 14px 28px; border-radius: 3px; text-decoration: none; border: 2px solid var(--gold); transition: all .25s; display: inline-block; }
+  .btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+  .btn-ghost { background: transparent; color: var(--white); font-family: 'Cinzel', serif; font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 14px 28px; border-radius: 3px; text-decoration: none; border: 2px solid rgba(255,255,255,.35); transition: all .25s; display: inline-block; }
+  .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+  /* hero stat card */
+  .hero-stat-card { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; backdrop-filter: blur(10px); padding: 32px 28px; }
+  .hsc-title { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 24px; text-align: center; }
+  .hsc-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .hsc-row:last-child { border-bottom: none; }
+  .hsc-num { font-family: 'EB Garamond', serif; font-size: 1.9rem; font-weight: 700; color: var(--gold-lt); line-height: 1; }
+  .hsc-label { font-size: .78rem; color: rgba(255,255,255,.55); margin-top: 3px; }
+  .hsc-item { text-align: center; }
+
+  /* ── SHARED ── */
+  section { padding: 72px 24px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .22em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+  .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem,2.8vw,2rem); font-weight: 700; color: var(--forest); line-height: 1.25; }
+  .title-rule { width: 56px; height: 3px; background: var(--gold); margin: 14px 0 36px; }
+  .section-intro { font-size: 1rem; color: var(--mid); max-width: 720px; font-weight: 300; line-height: 1.75; margin-bottom: 48px; }
+
+  /* ── WHY Professor Network EXISTS ── */
+  .why-section { background: var(--white); }
+  .why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .why-left { }
+  .why-left h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 16px; }
+  .why-left p { font-size: .96rem; color: var(--mid); line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+  .why-vision {
+    background: var(--cpn-teal); color: var(--white);
+    border-radius: 4px; padding: 22px 24px; margin-top: 24px;
+    font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.15rem; line-height: 1.65;
+  }
+  .why-vision cite { display: block; margin-top: 10px; font-size: .8rem; color: rgba(255,255,255,.6); font-style: normal; font-family: 'Cinzel', serif; letter-spacing: .08em; text-transform: uppercase; }
+  .why-pillars { display: flex; flex-direction: column; gap: 16px; }
+  .why-pillar {
+    background: var(--cream); border: 1px solid var(--border);
+    border-left: 4px solid var(--cpn-teal); border-radius: 0 5px 5px 0;
+    padding: 20px 22px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .wp-num { font-family: 'EB Garamond', serif; font-size: 2rem; font-weight: 700; color: rgba(28,74,90,.2); line-height: 1; flex-shrink: 0; width: 36px; }
+  .wp-content h4 { font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; color: var(--cpn-teal); margin-bottom: 6px; }
+  .wp-content p { font-size: .87rem; color: var(--mid); line-height: 1.65; }
+
+  /* ── OBJECTIVE BAND ── */
+  .objective-band { background: var(--cpn-teal); padding: 56px 24px; text-align: center; position: relative; overflow: hidden; }
+  .objective-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(184,152,42,.1) 0%, transparent 65%); }
+  .ob-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+  .ob-label { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+  .ob-text { font-family: 'EB Garamond', serif; font-size: clamp(1.25rem,2.5vw,1.7rem); font-style: italic; color: var(--white); line-height: 1.6; }
+  .ob-rule { width: 56px; height: 2px; background: var(--gold); margin: 20px auto 0; }
+
+  /* ── THREE PILLARS OVERVIEW ── */
+  .pillars-section { background: var(--parchment); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+  .pillar-card {
+    background: var(--white); border-radius: 6px; border: 1px solid var(--border);
+    overflow: hidden; transition: box-shadow .25s, transform .25s;
+    display: flex; flex-direction: column;
+  }
+  .pillar-card:hover { box-shadow: 0 10px 36px rgba(0,0,0,.1); transform: translateY(-4px); }
+  .pillar-card-header { padding: 28px 26px 22px; color: var(--white); position: relative; overflow: hidden; }
+  .pillar-card-header::after { content: attr(data-emoji); position: absolute; right: 16px; bottom: -8px; font-size: 5rem; opacity: .12; line-height: 1; pointer-events: none; }
+  .pillar-card-header.agri { background: linear-gradient(135deg, #2d5a27, var(--sage)); }
+  .pillar-card-header.med  { background: linear-gradient(135deg, var(--cpn-teal), var(--cpn-teal-lt)); }
+  .pillar-card-header.biz  { background: linear-gradient(135deg, var(--crimson), #a04060); }
+  .pillar-card-header .ph-label { font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65); margin-bottom: 8px; }
+  .pillar-card-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; line-height: 1.3; }
+  .pillar-body { padding: 22px 26px; flex: 1; }
+  .pillar-topics { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .pillar-topics li { display: flex; gap: 10px; align-items: center; font-size: .88rem; color: var(--mid); }
+  .pillar-topics li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .pillar-note { font-size: .78rem; color: var(--light); font-style: italic; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px; }
+  .pillar-link { display: block; margin: 0 26px 22px; text-align: center; background: var(--forest); color: var(--white); font-family: 'Cinzel', serif; font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 11px; border-radius: 3px; text-decoration: none; transition: background .2s; }
+  .pillar-link:hover { background: var(--sage); }
+
+  /* standards dev card */
+  .standards-card {
+    background: linear-gradient(135deg, var(--hunter), var(--forest));
+    border-radius: 6px; padding: 36px; color: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+  }
+  .sc-left h3 { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; }
+  .sc-left p { font-size: .93rem; color: rgba(255,255,255,.78); line-height: 1.75; }
+  .sc-right { display: flex; flex-direction: column; gap: 10px; }
+  .sc-item { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 4px; padding: 13px 16px; font-size: .87rem; color: rgba(255,255,255,.85); display: flex; gap: 12px; align-items: center; }
+  .sc-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  /* ── PARTICIPATION MODEL ── */
+  .participation-section { background: var(--white); }
+  .participation-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .part-tier {
+    background: var(--cream); border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    transition: box-shadow .2s;
+  }
+  .part-tier:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .part-tier-header { padding: 22px 24px; }
+  .part-tier-header.gen { background: var(--parchment); border-bottom: 1px solid var(--border); }
+  .part-tier-header.liaison { background: var(--cpn-teal); }
+  .part-tier-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; }
+  .part-tier-header.gen h3 { color: var(--forest); }
+  .part-tier-header.liaison h3 { color: var(--white); }
+  .part-tier-header p { font-size: .84rem; margin-top: 4px; }
+  .part-tier-header.gen p { color: var(--mid); }
+  .part-tier-header.liaison p { color: rgba(255,255,255,.7); }
+  .part-tier-body { padding: 22px 24px; }
+  .part-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .part-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .88rem; color: var(--mid); }
+  .part-list li .chk { color: var(--forest); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .part-list li .chk-teal { color: var(--cpn-teal); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .liaison-note { background: var(--gold-pale); border: 1px solid rgba(184,152,42,.3); border-left: 4px solid var(--gold); border-radius: 0 4px 4px 0; padding: 14px 18px; font-size: .86rem; color: var(--charcoal); margin-top: 16px; }
+  .liaison-note strong { color: var(--forest); }
+
+  /* voting diagram */
+  .voting-diagram {
+    background: var(--cpn-sky); border: 1px solid rgba(28,74,90,.12);
+    border-radius: 6px; padding: 28px 24px; margin-top: 24px;
+  }
+  .vd-title { font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--cpn-teal); margin-bottom: 16px; }
+  .vd-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .vd-pill { font-family: 'Cinzel', serif; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+  .vd-pill.primary { background: var(--cpn-teal); color: var(--white); }
+  .vd-pill.secondary { background: rgba(28,74,90,.1); color: var(--cpn-teal); border: 1px solid rgba(28,74,90,.2); }
+  .vd-arrow { color: var(--light); font-size: .9rem; }
+  .vd-label { font-size: .83rem; color: var(--mid); }
+
+  /* ── MEMBERSHIP ROLLOUT ── */
+  .rollout-section { background: var(--parchment); }
+  .rollout-track { display: flex; gap: 0; position: relative; margin-bottom: 48px; }
+  .rollout-track::before { content: ''; position: absolute; top: 32px; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--cpn-teal), var(--forest)); z-index: 0; }
+  .phase-card { flex: 1; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 32px 24px 28px; position: relative; z-index: 1; margin: 0 8px; transition: box-shadow .25s, transform .25s; }
+  .phase-card:first-child { margin-left: 0; }
+  .phase-card:last-child { margin-right: 0; }
+  .phase-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.09); transform: translateY(-4px); }
+  .phase-num { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin: 0 auto 18px; border: 4px solid var(--white); box-shadow: 0 0 0 2px var(--border); }
+  .phase-num.p1 { background: var(--gold); }
+  .phase-num.p2 { background: var(--cpn-teal); }
+  .phase-num.p3 { background: var(--forest); }
+  .phase-card h3 { font-family: 'Cinzel', serif; font-size: .92rem; font-weight: 700; color: var(--forest); text-align: center; margin-bottom: 14px; }
+  .phase-card p { font-size: .87rem; color: var(--mid); line-height: 1.65; text-align: center; }
+  .phase-badge { display: block; text-align: center; margin-top: 14px; font-family: 'Cinzel', serif; font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .phase-badge.active { color: var(--gold); }
+  .phase-badge.upcoming { color: var(--light); }
+
+  /* founding fellows CTA */
+  .fellows-cta {
+    background: var(--forest); color: var(--white); border-radius: 6px;
+    padding: 36px 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+  }
+  .fc-left h3 { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+  .fc-left p { font-size: .93rem; color: rgba(255,255,255,.78); line-height: 1.7; }
+  .fc-contact { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 4px; padding: 20px 24px; text-align: center; min-width: 220px; flex-shrink: 0; }
+  .fc-contact .name { font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; color: var(--gold-lt); margin-bottom: 4px; }
+  .fc-contact .pronouns { font-size: .76rem; color: rgba(255,255,255,.45); margin-bottom: 12px; }
+  .fc-contact a { display: block; background: var(--gold); color: var(--hunter); font-family: 'Cinzel', serif; font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 10px 18px; border-radius: 3px; text-decoration: none; transition: background .2s; }
+  .fc-contact a:hover { background: var(--gold-lt); }
+
+  /* ── ANNUAL CONVENING ── */
+  .convening-section { background: var(--white); }
+  .convening-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .convening-left h2 { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--forest); line-height: 1.25; margin-bottom: 16px; }
+  .convening-left p { font-size: .96rem; color: var(--mid); line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+  .agenda-card { background: var(--cream); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .agenda-header { background: var(--cpn-teal); color: var(--white); padding: 18px 24px; }
+  .agenda-header h4 { font-family: 'Cinzel', serif; font-size: .88rem; font-weight: 700; }
+  .agenda-header p { font-size: .8rem; color: rgba(255,255,255,.65); margin-top: 3px; }
+  .agenda-items { list-style: none; }
+  .agenda-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 22px; border-bottom: 1px solid var(--border); }
+  .agenda-item:last-child { border-bottom: none; }
+  .ai-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--cpn-teal); display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; color: var(--white); }
+  .ai-text h5 { font-size: .88rem; font-weight: 700; color: var(--charcoal); margin-bottom: 2px; }
+  .ai-text p { font-size: .82rem; color: var(--mid); }
+
+  /* membership benefits */
+  .benefits-card { background: var(--parchment); border: 1px solid var(--border); border-radius: 6px; padding: 28px 26px; margin-top: 24px; }
+  .bc-label { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .benefit-list li { display: flex; gap: 12px; align-items: flex-start; font-size: .9rem; color: var(--mid); }
+  .benefit-list li::before { content: '✓'; color: var(--forest); font-weight: 700; flex-shrink: 0; }
+
+  /* ── CTA BAND ── */
+  .cta-band { background: linear-gradient(135deg, var(--hunter), var(--cpn-teal)); padding: 80px 24px; text-align: center; position: relative; overflow: hidden; }
+  .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(184,152,42,.1) 0%, transparent 60%); }
+  .cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+  .cta-eyebrow { font-family: 'Cinzel', serif; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+  .cta-band h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 16px; }
+  .cta-band p { font-size: 1rem; color: rgba(255,255,255,.72); font-weight: 300; line-height: 1.75; margin-bottom: 36px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--hunter); color: rgba(255,255,255,.6); padding: 52px 24px 24px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 44px; }
+  .footer-brand-p { font-size: .86rem; margin-top: 14px; color: rgba(255,255,255,.48); line-height: 1.7; }
+  .footer-col h4 { font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { font-size: .86rem; color: rgba(255,255,255,.55); text-decoration: none; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--gold-lt); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; font-size: .77rem; color: rgba(255,255,255,.3); }
+  .footer-bottom a { color: rgba(255,255,255,.35); text-decoration: none; margin-left: 14px; }
+  .footer-bottom a:hover { color: var(--gold-lt); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .hero-inner, .why-layout, .participation-layout, .convening-layout, .standards-card, .fellows-cta { grid-template-columns: 1fr; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .rollout-track { flex-direction: column; }
+    .rollout-track::before { display: none; }
+    .phase-card { margin: 0 0 16px 0; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  .hero-inner > * { animation: slideUp .65s ease both; }
+  .hero-inner > *:nth-child(2) { animation-delay: .25s; }
+</style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <div class="inner">
+    <span>The Society of Cannabis in Higher Education — The Professor Network</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="logo-wrap" aria-label="The Society of Cannabis in Higher Education home">
+      <img class="logo-shield" src="CannabisLogo.png" alt="The Society of Cannabis in Higher Education logo">
+      <div class="org-main">The Society of Cannabis in Higher Education</div>
+    </a>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="professor-network.html" class="active" aria-current="page">The Professor Network</a></li>
+        <li><a href="membership.html">Membership</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="cpn-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="breadcrumb"><a href="index.html">Home</a> / The Professor Network</div>
+      <div class="cpn-eyebrow">
+        <span class="cpn-eyebrow-badge">Operating within SoCHE</span>
+        <span class="cpn-eyebrow-line"></span>
+      </div>
+      <h1>The Professor<br>Network
+        <span>Building consensus. Raising standards. Shaping the field.</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p>The Professor Network is a national community of higher education professionals dedicated to advancing academic excellence in cannabis and hemp education — developing the interdisciplinary, consensus-based curriculum standards the field has been missing.</p>
+      <div class="hero-actions">
+        <a href="#founding-fellows" class="btn-gold">Join as a Founding Fellow</a>
+        <a href="#structure" class="btn-ghost">Explore the Network</a>
+      </div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hsc-title">Network at a Glance</div>
+      <div class="hsc-row">
+        <div class="hsc-item">
+          <div class="hsc-num">3</div>
+          <div class="hsc-label">Academic Pillars</div>
+        </div>
+        <div class="hsc-item">
+          <div class="hsc-num">3</div>
+          <div class="hsc-label">Rollout Phases</div>
+        </div>
+      </div>
+      <div class="hsc-row">
+        <div class="hsc-item">
+          <div class="hsc-num">10+</div>
+          <div class="hsc-label">Focus Areas</div>
+        </div>
+        <div class="hsc-item">
+          <div class="hsc-num">1</div>
+          <div class="hsc-label">Annual Convening</div>
+        </div>
+      </div>
+      <div class="hsc-row" style="border-bottom:none;">
+        <div class="hsc-item" style="width:100%;text-align:center;">
+          <div class="hsc-num" style="color:var(--gold-lt);">Now Recruiting</div>
+          <div class="hsc-label">Founding Fellows · Phase I Active</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY Professor Network EXISTS -->
+<section class="why-section" id="about">
+  <div class="section-inner">
+    <div class="why-layout">
+      <div class="why-left">
+        <div class="section-label">Why We Exist</div>
+        <h2>Cannabis Education Is Expanding — Standards Are Not</h2>
+        <div class="title-rule"></div>
+        <p>Cannabis education is growing rapidly across colleges and universities, yet the field lacks the academic standards expected in nearly every other discipline. As new programs emerge, institutions often develop curricula independently, creating inconsistencies in educational quality, student outcomes, and workforce preparation.</p>
+        <p>The Professor Network was established to address this challenge before fragmentation becomes the norm. The network serves as a collaborative forum where educators from across disciplines work together to identify essential knowledge, competencies, and learning outcomes for cannabis and hemp education.</p>
+        <div class="why-vision">
+          "Every student entering the cannabis and hemp workforce should have access to a high-quality education built upon shared standards, interdisciplinary expertise, and a commitment to academic excellence."
+          <cite>— Professor Network Vision</cite>
+        </div>
+      </div>
+      <div class="why-pillars">
+        <div class="why-pillar">
+          <div class="wp-num">1</div>
+          <div class="wp-content">
+            <h4>Interdisciplinary Strength</h4>
+            <p>We connect medical faculty with business professors, chemists with communicators, agricultural scientists with public health experts — enabling a more comprehensive understanding of the industry and stronger educational standards.</p>
+          </div>
+        </div>
+        <div class="why-pillar">
+          <div class="wp-num">2</div>
+          <div class="wp-content">
+            <h4>Gap Analysis &amp; Curriculum Standardization</h4>
+            <p>The Professor Network fills a critical gap by providing a mechanism for program review, gap analysis, and curriculum standardization. Members identify emerging workforce needs, evaluate educational content, and help institutions build academically rigorous programs.</p>
+          </div>
+        </div>
+        <div class="why-pillar">
+          <div class="wp-num">3</div>
+          <div class="wp-content">
+            <h4>Neutral, Professor-Led Environment</h4>
+            <p>By fostering evidence-based dialogue and scholarly collaboration, the Professor Network bridges higher education, industry stakeholders, healthcare professionals, policymakers, and the public — grounded in academic integrity throughout.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVE BAND -->
+<div class="objective-band">
+  <div class="ob-inner">
+    <div class="ob-label">Professor Network Objective</div>
+    <p class="ob-text">"The Professor Network brings together educators across disciplines to develop consensus-based curriculum standards that strengthen cannabis and hemp education, improve workforce readiness, and advance academic excellence nationwide."</p>
+    <div class="ob-rule"></div>
+  </div>
+</div>
+
+<!-- THREE PILLARS OVERVIEW -->
+<section class="pillars-section" id="pillars">
+  <div class="section-inner">
+    <div class="section-label">Academic Organization</div>
+    <h2 class="section-title">Three Pillars of Focus</h2>
+    <div class="title-rule"></div>
+    <p class="section-intro">The Professor Network is organized around three academic pillars, each encompassing distinct focus areas. A dedicated Standards Development pillar coordinates curriculum benchmarking across all three, serving as the integrating spine of the network.</p>
+
+    <div class="pillars-grid">
+      <!-- Agricultural -->
+      <div class="pillar-card">
+        <div class="pillar-card-header agri" data-emoji="🌱">
+          <div class="ph-label">Pillar One</div>
+          <h3>Agricultural, Environmental Sciences &amp; Technology</h3>
+        </div>
+        <div class="pillar-body">
+          <ul class="pillar-topics">
+            <li>Agronomy</li>
+            <li>Manufacturing</li>
+            <li>Testing</li>
+          </ul>
+          <div class="pillar-note">Includes industrial hemp applications and environmental sustainability frameworks.</div>
+        </div>
+        <a href="#structure" class="pillar-link">Explore Participation →</a>
+      </div>
+
+      <!-- Medical -->
+      <div class="pillar-card">
+        <div class="pillar-card-header med" data-emoji="⚕️">
+          <div class="ph-label">Pillar Two</div>
+          <h3>Medical, Health Sciences &amp; Clinical Integration</h3>
+        </div>
+        <div class="pillar-body">
+          <ul class="pillar-topics">
+            <li>Endocannabinoid System</li>
+            <li>Pharmacology</li>
+            <li>Clinical Therapeutics</li>
+            <li>Public Health</li>
+          </ul>
+          <div class="pillar-note">Includes non-impairing cannabinoids and clinical education frameworks.</div>
+        </div>
+        <a href="#structure" class="pillar-link">Explore Participation →</a>
+      </div>
+
+      <!-- Business -->
+      <div class="pillar-card">
+        <div class="pillar-card-header biz" data-emoji="⚖️">
+          <div class="ph-label">Pillar Three</div>
+          <h3>Business, Economics &amp; Policy</h3>
+        </div>
+        <div class="pillar-body">
+          <ul class="pillar-topics">
+            <li>Regulatory Compliance</li>
+            <li>Legal Frameworks</li>
+            <li>Communications</li>
+            <li>Tax Code &amp; Banking</li>
+            <li>Social Equity</li>
+          </ul>
+          <div class="pillar-note">Bridges legal, economic, and equity dimensions of cannabis policy.</div>
+        </div>
+        <a href="#structure" class="pillar-link">Explore Participation →</a>
+      </div>
+    </div>
+
+    <!-- Standards Dev -->
+    <div class="standards-card">
+      <div class="sc-left">
+        <h3>Standards Development</h3>
+        <p>The Standards Development pillar drives a consensus-based process to develop curriculum standards for each focus area and its respective subtopics. It functions as the integrating spine of the Professor Network, drawing expertise from all three pillars to establish shared benchmarks for cannabis and hemp education.</p>
+      </div>
+      <div class="sc-right">
+        <div class="sc-item"><span class="sc-icon">📋</span> Curriculum review cycles across all pillars</div>
+        <div class="sc-item"><span class="sc-icon">🤝</span> Consensus-building among participating professors</div>
+        <div class="sc-item"><span class="sc-icon">📊</span> Gap analysis and workforce needs identification</div>
+        <div class="sc-item"><span class="sc-icon">🏆</span> Shared academic benchmarks for cannabis education</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPATION MODEL -->
+<section class="participation-section" id="structure">
+  <div class="section-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Network Structure &amp; Participation</h2>
+    <div class="title-rule"></div>
+    <p class="section-intro">The Professor Network operates on a flexible participation model that allows professors to engage at varying levels of commitment — from open participation to active standards leadership. No formal membership required to begin.</p>
+
+    <div class="participation-layout">
+      <div>
+        <div class="part-tier">
+          <div class="part-tier-header gen">
+            <h3>General Participation</h3>
+            <p>Open to all higher education professionals — no formal membership required</p>
+          </div>
+          <div class="part-tier-body">
+            <ul class="part-list">
+              <li><span class="chk">✓</span> Participate in the Professor Network without formal membership status</li>
+              <li><span class="chk">✓</span> Select a primary pillar reflecting your area of expertise</li>
+              <li><span class="chk">✓</span> Voting rights during standard reviews within your primary pillar</li>
+              <li><span class="chk">✓</span> Join discussions in additional pillars as an observer</li>
+              <li><span class="chk">✓</span> Attend the Annual Convening regardless of membership status</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="voting-diagram">
+          <div class="vd-title">How Voting Rights Work</div>
+          <div class="vd-row">
+            <span class="vd-pill primary">Primary Pillar</span>
+            <span class="vd-arrow">→</span>
+            <span class="vd-label">Full voting rights on curriculum standards</span>
+          </div>
+          <div class="vd-row">
+            <span class="vd-pill secondary">Additional Pillars</span>
+            <span class="vd-arrow">→</span>
+            <span class="vd-label">Discussion &amp; observation only — no voting</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="part-tier">
+          <div class="part-tier-header liaison">
+            <h3>Standards Liaisons</h3>
+            <p>Highly active leadership role — requires Standards Development as primary pillar</p>
+          </div>
+          <div class="part-tier-body">
+            <ul class="part-list">
+              <li><span class="chk-teal">✓</span> Manage focus area activities supporting the standards development process</li>
+              <li><span class="chk-teal">✓</span> Coordinate curriculum review cycles and facilitate consensus among participants</li>
+              <li><span class="chk-teal">✓</span> Serve as primary point of contact for their identified focus area</li>
+              <li><span class="chk-teal">✓</span> Lead agenda setting for the upcoming standards development cycle</li>
+              <li><span class="chk-teal">✓</span> Elected at the Annual Convening by network participants</li>
+            </ul>
+            <div class="liaison-note">
+              <strong>Eligibility note:</strong> Standards Liaison eligibility may be restricted to formal network members. See membership phases below for details.
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-card" style="margin-top:16px;">
+          <div class="bc-label">Formal Membership Benefits</div>
+          <ul class="benefit-list">
+            <li>Access to pillar collaboration boards — share course documents, troubleshoot curriculum challenges, and access peer-contributed materials</li>
+            <li>Free or reduced-cost access to The Society of Cannabis in Higher Education journal issues</li>
+            <li>Priority consideration for Standards Liaison roles (eligibility under review)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP ROLLOUT -->
+<section class="rollout-section" id="founding-fellows">
+  <div class="section-inner">
+    <div class="section-label">Membership Phases</div>
+    <h2 class="section-title">Network Membership Rollout</h2>
+    <div class="title-rule"></div>
+    <p class="section-intro">Membership will be introduced in three sequential phases to ensure strong foundational governance before opening to the broader higher education community.</p>
+
+    <div class="rollout-track">
+      <div class="phase-card">
+        <div class="phase-num p1">I</div>
+        <h3>Founding Fellows</h3>
+        <p>Onboard a foundational cohort of cannabis professors whose expertise serves as initial network dues. Focus: establishing governance bylaws, populating the resource library, and setting initial consensus benchmarks.</p>
+        <span class="phase-badge active">● Currently Active</span>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num p2">II</div>
+        <h3>Lifetime Fellows</h3>
+        <p>Founding Fellows transition into permanent Lifetime Fellows with reduced ongoing membership fees, retaining all founding benefits and governance rights within the network.</p>
+        <span class="phase-badge upcoming">○ Upcoming</span>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num p3">III</div>
+        <h3>General Membership</h3>
+        <p>Open general network membership to all higher education instructors working in cannabis and hemp-related fields. Full access to all pillar collaboration tools and resources.</p>
+        <span class="phase-badge upcoming">○ Upcoming</span>
+      </div>
+    </div>
+
+    <div class="fellows-cta">
+      <div class="fc-left">
+        <h3>Interested in the Founding Fellows Program?</h3>
+        <p>If you are a higher education professional working in cannabis or hemp-related fields and interested in shaping the foundational governance of the Professor Network, we invite you to reach out directly. Founding Fellows contribute expertise in lieu of standard membership dues during Phase I.</p>
+      </div>
+      <div class="fc-contact">
+        <div class="name">Nyomi Barrick-Wommack</div>
+        <div class="pronouns">she/her · Professor Network Founding Coordinator</div>
+        <a href="mailto:nyomibarrick2@gmail.com">Email to Connect →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANNUAL CONVENING -->
+<section class="convening-section" id="convening">
+  <div class="section-inner">
+    <div class="convening-layout">
+      <div class="convening-left">
+        <div class="section-label">Annual Gathering</div>
+        <h2>The Professor Network Annual Convening</h2>
+        <div class="title-rule"></div>
+        <p>The Professor Network holds an annual convening open to all participating professors, regardless of membership status. It serves as the primary forum for collective knowledge-sharing and network governance.</p>
+        <p>The convening is where the network sets direction — presentations from member institutions drive the agenda for the upcoming standards development cycle, ensuring the process remains grounded in real program experience.</p>
+        <div class="benefits-card">
+          <div class="bc-label">Who Should Attend</div>
+          <ul class="benefit-list">
+            <li>Faculty and instructors in cannabis or hemp-related academic programs</li>
+            <li>Researchers working on cannabinoid science, policy, or public health</li>
+            <li>Curriculum developers and program directors at accredited institutions</li>
+            <li>Standards Development pillar members and Standards Liaison candidates</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="agenda-card">
+          <div class="agenda-header">
+            <h4>Annual Convening Agenda</h4>
+            <p>Open to all participating professors · Held annually</p>
+          </div>
+          <ul class="agenda-items">
+            <li class="agenda-item">
+              <div class="ai-icon">📊</div>
+              <div class="ai-text">
+                <h5>Emerging Trends &amp; Program Successes</h5>
+                <p>Presentations on developments, issues, and institutional success stories from participant institutions across all three pillars.</p>
+              </div>
+            </li>
+            <li class="agenda-item">
+              <div class="ai-icon">📋</div>
+              <div class="ai-text">
+                <h5>Standards Development Agenda Setting</h5>
+                <p>Informed by presented materials, the network collectively sets priorities for the upcoming curriculum standards development cycle.</p>
+              </div>
+            </li>
+            <li class="agenda-item">
+              <div class="ai-icon">🔍</div>
+              <div class="ai-text">
+                <h5>Curriculum Standards Review</h5>
+                <p>Presentation and discussion of proposed or revised curriculum standards across focus areas — voting rights apply by pillar.</p>
+              </div>
+            </li>
+            <li class="agenda-item">
+              <div class="ai-icon">🗳️</div>
+              <div class="ai-text">
+                <h5>Standards Liaison Elections</h5>
+                <p>Where applicable, members elect Standards Liaison representatives for each focus area to lead the upcoming review cycle.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Join the Network</div>
+    <h2>Help Shape the Future of Cannabis &amp; Hemp Education</h2>
+    <p>The Professor Network is actively building its foundational cohort of Founding Fellows. If you teach, research, or develop curriculum in cannabis or hemp-related fields, your expertise is exactly what the network needs.</p>
+    <div class="cta-actions">
+      <a href="mailto:nyomibarrick2@gmail.com" class="btn-gold">Contact Nyomi to Join</a>
+      <a href="membership.html#contact-form" class="btn-ghost">SoCHE Membership →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="org-main" style="color:var(--white);max-width:none;">The Society of Cannabis in Higher Education</div>
+        <p class="footer-brand-p">The Professor Network operates within SoCHE, uniting faculty, researchers, and subject-matter experts to develop consensus-based curriculum standards for cannabis and hemp education.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Professor Network</h4>
+        <ul>
+          <li><a href="#about">Why the Network Exists</a></li>
+          <li><a href="#pillars">Three Pillars</a></li>
+          <li><a href="#structure">Network Structure</a></li>
+          <li><a href="#founding-fellows">Founding Fellows</a></li>
+          <li><a href="#convening">Annual Convening</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Society</h4>
+        <ul>
+          <li><a href="about.html">About SoCHE</a></li>
+          <li><a href="professor-network.html">The Professor Network</a></li>
+          <li><a href="membership.html">Membership</a></li>
+          <li><a href="about.html#board">Board of Directors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:nyomibarrick2@gmail.com">Professor Network Inquiries</a></li>
+          <li><a href="membership.html#contact-form">Membership Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 The Society of Cannabis in Higher Education. The Professor Network. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.pillar-card, .phase-card, .why-pillar, .agenda-item, .part-tier').forEach(el => {
+    el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
